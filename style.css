@@ -1,5 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
 #button-container {
     text-align: center;
+}
+
+body, html, svg, p text{
+  background-color:#232629;
+  color:#eff0f1;
+  display:block;
+  margin:auto;
+  font-family:Noto Sans, 'Noto Sans', sans-serif;
+  cursor:url(default.png), auto;
+}
+svg{
+  border-color:#eff0f1;
+  border:solid;
+  height:70vh;
 }
 
 h1 {

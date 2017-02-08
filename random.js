@@ -5,7 +5,19 @@ var namespace = "http://www.w3.org/2000/svg"
 // You need to use at least 3 different types of shape.
 // Remember, for the shapes to show up on the canvas, you'll need to CALL the function.
 function createFirstScene() {
-    
+    makeCircle(100, 50, 30, "#DD6655", 1);
+    makeCircle(91,38,5,"#FFF",1);
+    makeCircle(109,38,5,"#FFF",1);
+    makeCircle(91.6,38.6,2,"#000",1);
+    makeCircle(109.6,38.6,2,"#000",1);
+    //makeEllipse(100,53,8,7,"#E55D2A");
+    makePath("M 92.2 54 C 92 43 108 43 107.8 54","#D55E4D", "#D55E4D")
+    makeEllipse(100,54,8,6,"#CC5544");
+    makeEllipse(98,54,1.5,3,"#000");
+    makeEllipse(102,54,1.5,3,"#000");
+    makePath("M 89 65 C 96 70 110 68 115 62","#000", "none","round");
+    makePath("M 85 25 c -17 10 -13 20 -12 20 c 13 -10 13 -20 12 -20","#CC5544","#CC5544");
+    makePath("M 115 25 c 17 10 13 20 12 20 c -13 -10 -13 -20 -12 -20","#CC5544","#CC5544");
 }
 
 
@@ -13,7 +25,12 @@ function createFirstScene() {
 // You need to use at least 3 different types of shape.
 // Remember, for the shapes to show up on the canvas, you'll need to CALL the function.
 function createSecondScene() {
-    
+    makeCircle(Math.random()*200,Math.random()*100, Math.random()*50, createColor());
+    var rectWidth = Math.random()*100;
+    var rectHeight = Math.random()*100;
+    makeRect(Math.random()*200-rectWidth,Math.random()*100-rectHeight, rectWidth, rectHeight, createColor());
+    var pathc = createColor()
+    makePath("M " + Math.random()*200 + " " + Math.random()*100 + " l "+((Math.random()*200)-100) + " "+((Math.random()*200)-100) + " l "+((Math.random()*200)-100) + " "+((Math.random()*200)-100) + " C",pathc,pathc);
 }
 
 
@@ -21,7 +38,9 @@ function createSecondScene() {
 // You need to use at least 3 different types of shape.
 // Remember, for the shapes to show up on the canvas, you'll need to CALL the function.
 function createThirdScene() {
-    
+    makePath("M 150 10 l 40 0 l 0 80 l -40 0 l 0 -80","#000","#FFF");
+    makeBdRect(30,10,106,64,"#FFF","#000")
+    makeBdRect(35,15,96,54,"#000","#000")
 }
 
 
@@ -31,23 +50,73 @@ function createThirdScene() {
 // FILL IN THIS FUNCTION!
 // This function is called whenever you press the "Go!" button.
 function createRandomScene() {
+    for (var children = document.getElementById("canvas").children;children.length>0;document.getElementById("canvas").removeChild(children[0]))
     // Generate a random number between 0 and 1, and store it in a variable.
-    
+    var random=Math.random()
     // If the number is less than 0.33, call the function to create your first scene.
     
-    
+    if (random<0.33){
+	createFirstScene()
+    }
     
     // Else, if the number is less than 0.67, call the function to create your second scene.
     
-    
-    
+    else if (random<0.67){
+	createSecondScene()
+    }
     // Else, call the function to create your third scene.
     
-    
+    else {
+	createThirdScene()
+    }
+    //alert("Test " + Math.random())
     
 }
 
+function createColor(){
+    var select1 = ["D", "E", "F"];
+    var select2 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+    var red = select2[Math.floor(Math.random()*16)] + select2[Math.floor(Math.random()*16)];
+    var green = select2[Math.floor(Math.random()*16)] + select2[Math.floor(Math.random()*16)];
+    var blue = select2[Math.floor(Math.random()*16)] + select2[Math.floor(Math.random()*16)];
+    var color = "#" + red + green + blue;
+    return color;
+}
 
+function makeBdRect(x, y, width, height, fill, stroke, opacity) {
+  var rect = document.createElementNS(namespace, "rect")
+  rect.setAttribute("x", x)
+  rect.setAttribute("y", y)
+  rect.setAttribute("width", width)
+  rect.setAttribute("height", height)
+  rect.setAttribute("fill", fill)
+  rect.setAttribute("opacity", opacity)
+  rect.setAttribute("stroke",stroke)
+  
+  var canvas = document.getElementById("canvas")
+  canvas.appendChild(rect)
+  return rect
+}
+
+var canvas = document.getElementById("canvas");
+var defs = document.createElementNS(namespace, "defs");
+defs.setAttribute("id","defs");
+canvas.append(defs);
+
+function makePath(d,stroke,fill,linecap,strokeWidth){
+  var path = document.createElementNS(namespace, "path")
+  path.setAttribute("d",d);
+  path.setAttribute("stroke",stroke);
+  path.setAttribute("fill",fill)
+  path.setAttribute("stroke-linecap",linecap)
+  path.setAttribute("stoke-width",strokeWidth)
+  var canvas = document.getElementById("canvas")
+  canvas.appendChild(path)
+}
+
+function makeGradient(stop1, stop2){
+  //
+}
 
 // DO NOT EDIT ANYTHING BELOW THIS LINE!
 // These are the functions you should call to
