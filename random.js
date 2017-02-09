@@ -1,5 +1,5 @@
 var namespace = "http://www.w3.org/2000/svg"
-
+var html = "http://www.w3.org/1999/xhtml"
 
 // Fill in this function so that it draws something using SVG shapes!
 // You need to use at least 3 different types of shape.
@@ -39,8 +39,16 @@ function createSecondScene() {
 // Remember, for the shapes to show up on the canvas, you'll need to CALL the function.
 function createThirdScene() {
     makePath("M 150 10 l 40 0 l 0 80 l -40 0 l 0 -80","#000","#FFF");
+    makePath("M 155 15 l 30 0 l 0 7 l -30 0 l 0 -7","#000","#FFF");
+    makePath("M 155 22 l 30 0 l 0 7 l -30 0 l 0 -7","#000","#FFF");
+    makePath("M 155 29 l 30 0 l 0 7 l -30 0 l 0 -7","#000","#FFF");
+    makeBdCircle("182", "43", "2", "#DDD", "#000")
+    makeBdEllipse("83","85","10","3","#FFF", "#000")
+    //makeLine("83","70","83", "85", "#FFF", 3)
+    makeBdRect("80","40","6","44","#FFF","#000")
     makeBdRect(30,10,106,64,"#FFF","#000")
     makeBdRect(35,15,96,54,"#000","#000")
+    makeIframe(35,15,96,54,1920,1080,"index.html")
 }
 
 
@@ -73,6 +81,64 @@ function createRandomScene() {
     
 }
 
+function makeIframe(x,y,width,height,innerwidth, innerheight, src){
+    var foreignObject = document.createElementNS(namespace, "foreignObject")
+    foreignObject.setAttribute("x",0)
+    foreignObject.setAttribute("y",0)
+    foreignObject.setAttribute("width",innerwidth)
+    foreignObject.setAttribute("height",innerheight)
+    var body = document.createElementNS(html,"body")
+    var iframe = document.createElementNS(html,"iframe")
+    iframe.setAttribute("src", src)
+    iframe.setAttribute("width",innerwidth)
+    iframe.setAttribute("height",innerheight)
+    var canvas2 = document.createElementNS(namespace,"svg")
+    canvas2.setAttribute("viewbox", "0 0 " + innerwidth + " " + innerheight)
+    canvas2.setAttribute("width",width)
+    canvas2.setAttribute("height",height)
+    canvas2.setAttribute("x",x)
+    canvas2.setAttribute("y",y)
+    var g = document.createElementNS(namespace,"g")
+    g.setAttribute("x",x)
+    g.setAttribute("y",y)
+
+    body.appendChild(iframe)
+    foreignObject.appendChild(body)
+    var canvas = document.getElementById("canvas")
+    canvas2.appendChild(foreignObject)
+    g.appendChild(canvas2)
+    canvas.appendChild(g)
+}
+
+function makeBdCircle(cx, cy, r, fill, stroke, opacity) {
+  var circle = document.createElementNS(namespace, "circle")
+  circle.setAttribute("cx", cx)
+  circle.setAttribute("cy", cy)
+  circle.setAttribute("r", r)
+  circle.setAttribute("fill", fill)
+  circle.setAttribute("stroke", stroke)
+  circle.setAttribute("opacity", opacity)
+  
+  var canvas = document.getElementById("canvas")
+  canvas.appendChild(circle)
+  return circle
+}
+
+function makeBdEllipse(cx, cy, rx, ry, fill, stroke, opacity) {
+  var ellipse = document.createElementNS(namespace, "ellipse")
+  ellipse.setAttribute("cx", cx)
+  ellipse.setAttribute("cy", cy)
+  ellipse.setAttribute("rx", rx)
+  ellipse.setAttribute("ry", ry)
+  ellipse.setAttribute("fill", fill)
+  ellipse.setAttribute("stroke",stroke)
+  ellipse.setAttribute("opacity", opacity)
+  
+  var canvas = document.getElementById("canvas")
+  canvas.appendChild(ellipse)
+  return ellipse
+}
+
 function createColor(){
     var select1 = ["D", "E", "F"];
     var select2 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
@@ -101,7 +167,7 @@ function makeBdRect(x, y, width, height, fill, stroke, opacity) {
 var canvas = document.getElementById("canvas");
 var defs = document.createElementNS(namespace, "defs");
 defs.setAttribute("id","defs");
-canvas.append(defs);
+canvas.appendChild(defs);
 
 function makePath(d,stroke,fill,linecap,strokeWidth){
   var path = document.createElementNS(namespace, "path")
