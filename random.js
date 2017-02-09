@@ -100,7 +100,7 @@ function makeIframe(x,y,width,height,innerwidth, innerheight, src){
     iframe.setAttribute("marginwidth",0)
     iframe.setAttribute("frameborder",0)
     var canvas2 = document.createElementNS(namespace,"svg")
-    canvas2.setAttribute("viewBox", "-70 -70 " + (innerwidth+125) + " " + (innerheight+115))
+    canvas2.setAttribute("viewBox", "-70 -70 " + (innerwidth+130) + " " + (innerheight+115))
     canvas2.setAttribute("width",width+6.5)
     canvas2.setAttribute("height",height+9)
     canvas2.setAttribute("x",x-3.5)
