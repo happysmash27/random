@@ -48,7 +48,7 @@ function createThirdScene() {
     makeBdRect("80","40","6","44","#FFF","#000")
     makeBdRect(30,10,106,64,"#FFF","#000")
     makeBdRect(35,15,96,54,"#000","#000")
-    makeIframe(35,15,96,54,1920,1080,"index.html")
+    makeIframe(35,15,96,54,1920,1080,"https://duckduckgo.com")
 }
 
 
@@ -92,8 +92,11 @@ function makeIframe(x,y,width,height,innerwidth, innerheight, src){
     iframe.setAttribute("src", src)
     iframe.setAttribute("width",innerwidth)
     iframe.setAttribute("height",innerheight)
+    iframe.setAttribute("marginheight",0)
+    iframe.setAttribute("marginwidth",0)
+    iframe.setAttribute("frameborder",0)
     var canvas2 = document.createElementNS(namespace,"svg")
-    canvas2.setAttribute("viewbox", "0 0 " + innerwidth + " " + innerheight)
+    canvas2.setAttribute("viewBox", "0 0 " + innerwidth + " " + innerheight)
     canvas2.setAttribute("width",width)
     canvas2.setAttribute("height",height)
     canvas2.setAttribute("x",x)
