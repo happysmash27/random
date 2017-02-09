@@ -8,8 +8,10 @@ function createFirstScene() {
     makeCircle(100, 50, 30, "#DD6655", 1);
     makeCircle(91,38,5,"#FFF",1);
     makeCircle(109,38,5,"#FFF",1);
-    makeCircle(91.6,38.6,2,"#000",1);
-    makeCircle(109.6,38.6,2,"#000",1);
+    var xc = Math.random()-0.5
+    var yc = Math.random()-0.5
+    makeCircle(91+xc,38+yc,2,"#000",1);
+    makeCircle(109+xc,38+yc,2,"#000",1);
     //makeEllipse(100,53,8,7,"#E55D2A");
     makePath("M 92.2 54 C 92 43 108 43 107.8 54","#D55E4D", "#D55E4D")
     makeEllipse(100,54,8,6,"#CC5544");
@@ -48,7 +50,9 @@ function createThirdScene() {
     makeBdRect("80","40","6","44","#FFF","#000")
     makeBdRect(30,10,106,64,"#FFF","#000")
     makeBdRect(35,15,96,54,"#000","#000")
-    makeIframe(35,15,96,54,1920,1080,"https://duckduckgo.com")
+    if (Math.random()<=0.5){
+	makeIframe(35,15,96,54,1920,1080,"https://kde.org")
+    } else{makeIframe(35,15,96,54,1920,1080,"https://duckduckgo.com")}
 }
 
 
@@ -96,7 +100,7 @@ function makeIframe(x,y,width,height,innerwidth, innerheight, src){
     iframe.setAttribute("marginwidth",0)
     iframe.setAttribute("frameborder",0)
     var canvas2 = document.createElementNS(namespace,"svg")
-    canvas2.setAttribute("viewBox", "0 0 " + innerwidth + " " + innerheight)
+    canvas2.setAttribute("viewBox", "-50 -60 " + (innerwidth+80) + " " + (innerheight+80))
     canvas2.setAttribute("width",width)
     canvas2.setAttribute("height",height)
     canvas2.setAttribute("x",x)

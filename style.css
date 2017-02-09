@@ -22,3 +22,8 @@ h1 {
     text-align: center;
 }
 
+foreignObject,iframe{
+    display:block;
+    margin:none;
+    padding:none;
+}
